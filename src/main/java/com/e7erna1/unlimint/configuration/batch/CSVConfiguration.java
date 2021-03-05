@@ -1,6 +1,5 @@
-package com.e7erna1.unlimint.configuration.batchConfigurations.JSON;
+package com.e7erna1.unlimint.configuration.batch;
 
-import com.e7erna1.unlimint.configuration.batchConfigurations.generalMethods.JOBInterface;
 import com.e7erna1.unlimint.entity.Payment;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -14,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class JSONConfiguration implements JOBInterface {
+public class CSVConfiguration implements JobInterface {
 
   private final JobBuilderFactory jobBuilderFactory;
   private final StepBuilderFactory stepBuilderFactory;
@@ -22,10 +21,10 @@ public class JSONConfiguration implements JOBInterface {
   private final ItemProcessor<Payment, Payment> paymentPaymentItemProcessor;
   private final ItemWriter<Payment> paymentItemWriter;
 
-  public JSONConfiguration(
+  public CSVConfiguration(
       JobBuilderFactory jobBuilderFactory,
       StepBuilderFactory stepBuilderFactory,
-      @Qualifier("Reader-JSON") ItemReader<Payment> paymentItemReader,
+      @Qualifier("Reader-CSV") ItemReader<Payment> paymentItemReader,
       ItemProcessor<Payment, Payment> paymentPaymentItemProcessor,
       ItemWriter<Payment> paymentItemWriter) {
     this.jobBuilderFactory = jobBuilderFactory;
@@ -35,7 +34,7 @@ public class JSONConfiguration implements JOBInterface {
     this.paymentItemWriter = paymentItemWriter;
   }
 
-  @Bean("JSONJob")
+  @Bean("CSVJob")
   public Job Job() {
     Step step = stepBuilderFactory
         .get("step")
@@ -45,13 +44,13 @@ public class JSONConfiguration implements JOBInterface {
         .writer(paymentItemWriter)
         .build();
     return jobBuilderFactory
-        .get("JSONJob")
+        .get("CSVJob")
         .start(step)
         .build();
   }
 
   @Override
   public String myType() {
-    return "json";
+    return "csv";
   }
 }

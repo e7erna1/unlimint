@@ -1,4 +1,4 @@
-package com.e7erna1.unlimint.configuration.batchConfigurations.CSV;
+package com.e7erna1.unlimint.reader;
 
 import com.e7erna1.unlimint.entity.Payment;
 import java.io.File;
@@ -14,16 +14,16 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Component;
 
 @StepScope
-@Component("Reader-CSV")
-public class CSVItemReader implements ItemReader<Payment> {
+@Component("Reader-JSON")
+public class JSONItemReader implements ItemReader<Payment> {
 
   private final ConversionService conversionService;
+  private final Class<Payment> classType = Payment.class;
   private File file;
   private Scanner scanner;
-  private final Class<Payment> classType = Payment.class;
   private Integer lineNumber = 0;
 
-  public CSVItemReader(@Qualifier("Converter-CSV") ConversionService conversionService) {
+  public JSONItemReader(@Qualifier("Converter-JSON") ConversionService conversionService) {
     this.conversionService = conversionService;
   }
 

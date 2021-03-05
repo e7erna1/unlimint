@@ -1,4 +1,4 @@
-package com.e7erna1.unlimint.configuration.batchConfigurations.JSON;
+package com.e7erna1.unlimint.converter;
 
 import com.e7erna1.unlimint.entity.Payment;
 import org.codehaus.jettison.json.JSONObject;

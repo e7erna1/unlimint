@@ -1,4 +1,4 @@
-package com.e7erna1.unlimint.configuration.batchConfigurations.generalMethods;
+package com.e7erna1.unlimint.processor;
 
 import com.e7erna1.unlimint.entity.Payment;
 import org.springframework.batch.item.ItemProcessor;
